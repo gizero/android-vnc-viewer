@@ -32,6 +32,7 @@ package android.androidVNC;
 import java.io.IOException;
 import java.util.zip.Inflater;
 
+import android.androidVNC.sip.SipClient;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -88,6 +89,10 @@ public class VncCanvas extends ImageView {
 	// VNC protocol connection
 	public RfbProto rfb;
 
+	// SIP protocol connection
+	private SipClient sp;
+	private Context mContext;
+
 	// Internal bitmap data
 	AbstractBitmapData bitmapData;
 	public Handler handler = new Handler();
@@ -133,6 +138,7 @@ public class VncCanvas extends ImageView {
 	public VncCanvas(final Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
+		mContext = context;
 		scrollRunnable = new MouseScrollRunnable();
 		handleRREPaint = new Paint();
 		handleRREPaint.setStyle(Style.FILL);
@@ -178,6 +184,10 @@ public class VncCanvas extends ImageView {
 							pd.setMessage("Downloading first frame.\nPlease wait...");
 						}
 					});
+
+					sp = new SipClient(mContext, handler);
+					sp.init("ws://gizero.net:12345");
+
 					processNormalProtocol(getContext(), pd, setModes);
 				} catch (Throwable e) {
 					if (maintainConnection) {

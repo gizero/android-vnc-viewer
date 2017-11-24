@@ -1,0 +1,33 @@
+Osservazioni
+
+* Android VNC presente sullo store sembra essere un build marchiato 0.6.0 (Mar
+2017) dei sorgenti presenti in [1].
+
+* La collezione di sorgenti parzialmente modificati fornita da Cemb è invece
+  basata su [2].
+
+* Inizialmente SIP è stato sviluppato sulla codebase [2] ma, successivamente,
+  sono emerse incongruenze di comportamento di [2] rispetto al build
+  disponibile sullo store, sia su emulatore che su target fisico Nexus 5.
+
+* In coseguenza del punto precedente SIP è stato portato sulla codebase [1],
+  rendendo più facile il confronto con la versione sullo store. Ciò ha
+  richiesto la conversione del progetto in [1] da Eclipse ad Android Studio.
+
+[1] https://github.com/antlersoft/android-vnc-viewer
+[2] https://github.com/binkybear/androidVNC
+
+Problemi noti:
+
+* non tutti i caratteri della tastiera Android vengono correttamente trasmessi
+  da VNC
+
+Aspetti da considerare:
+
+* verifiche di compatibilità con API/SDK recenti in vista dell'adozione in
+  produzione di AndroidVNC
+
+* [1] installato dallo store ha menu (...) nello spazio dei 3 tasti virtuali:
+  questa pratica sembra essere deprecata e a rischio di non essere più
+  supportata nelle API recenti.
+
